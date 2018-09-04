@@ -1,4 +1,4 @@
-###ThinkStats2: Exploratory Data Analysis
+### ThinkStats2: Exploratory Data Analysis
 
 The [NSFG](http://cdc.gov/nchs/nsfg.htm) is cross-sectional survey conducted by the federal government on U.S. citizens
 between the ages of 15 and 44. The surveyors recruit a representative sample of people
