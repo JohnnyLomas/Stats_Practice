@@ -18,7 +18,7 @@
 
 [Data Validation](#validation)
 
-[Interpretation](#interpretation)
+[End of Chapter Exercises](#end-of-chapter-exercises)
 
 
 
@@ -55,13 +55,12 @@ function creates a dataframe with pregnancy data necessary for using pandas from
 survey using another function called 'ReadFixedWidth()' which formats fixed with ASCII text files
 in a proper form for dataframe construction. Code to view the pregnancy dataframe:
 
-> import nsfg
->
-> df = nsfg.ReadFemPreg()
->
-> df
+```
+import nsfg
+df = nsfg.ReadFemPreg()
+df
 
-
+```
 
 #### Dataframes in Pandas
 
@@ -75,29 +74,36 @@ Some operations with the nsfg dataframe in pandas:
 
 Obtain an 'index' of the column variables (An index is a data structure in pandas):
 
-> df.columns
+```
+df.columns
 
+```
 
 Index into the column names to obtain a column name as a string:
 
->df.columns[1]
+```
+df.columns[1]
 
+```
 
 Access a column from the data frame using the column's name. Accessing data in this way results
 in a series, which is another pandas data structure:
 
-> col = df['pregordr']
+```
+col = df['pregordr']
 
+```
 
 A series is a data structure in Pandas that provides the data in the column along with the index
 for each datum. The series name, number of entries, and data type is also stored.
 
 Access elements of a series using an integer or a slice:
 
-> series[1]
->
-> series[2:5]
+```
+series[1]
+series[2:5]
 
+```
 
 
 #### Transformations
@@ -108,18 +114,15 @@ Whenever raw data is imported it is typical that certain transformations constit
 cleaning must be performed in order to facilitate computation. ThinkStats has provided a function
 called CleanFemPreg() that performs this in the nsfg data.
 
-> def CleanFemPreg(df):
->
->> df.agepreg /= 100.0
->>
->> na_vals = [97, 98, 99]
->>
->> df.birthwgt_lb.replace(na_vals, np.nan, inplace=True)
->>
->> df.birthwgt_oz.replace(na_vals, np.nan, inplace=True)
->>
->> df[totalwgt_lb] = df.birthwgt_lb + df.birthwgt_oz / 16.0
+```
+def CleanFemPreg(df):
+	df.agepreg /= 100.0
+	na_vals = [97, 98, 99]
+	df.birthwgt_lb.replace(na_vals, np.nan, inplace=True)
+	df.birthwgt_oz.replace(na_vals, np.nan, inplace=True)
+	df[totalwgt_lb] = df.birthwgt_lb + df.birthwgt_oz / 16.0
 
+```
 
 Here, data age data encoded in centi-years is converted to years, the encoded values of 
 97, 98, and 99 in the weight data are replaced with Nan values, and a new total weight column
@@ -136,32 +139,88 @@ basic statistical values and compare them to previously observed phenomena. The 
 structure in Pandas provides a useful tool for tallying data in coloums. The value_counts()
 function provides values tallied up with their counts:
 
-> df.birthwgt_lb.value_counts(sort=False)
+```
+df.birthwgt_lb.value_counts(sort=False)
 
+```
 
 This gives a quick picture of the distribution of baby weights. Do they make sense? Nope... we
 found a 51 pound baby. That data point will have to be removed.
 
 0  8
+
 1  40
+
 2  53
+
 3  98
+
 4  229
+
 5  697
+
 6  2223
+
 7  3049
+
 8  1889
+
 9  623
+
 10 132
+
 11 26
+
 12 10
+
 13 3
+
 14 3
+
 15 1
+
 51 1
 
 
 
-#### Interpretation
+#### End of Chapter Exercises
+
+##### Exercise 1.1
+
+The following are useful tidbits of code that I found useful while completing the 
+end of chapter exercises.
+
+Obtain the value counts for column (ColumnName) from dataframe (df):
+
+```
+df.ColumnName.value_counts()
+```
+
+Count the number od Nan's in a column:
+
+```
+df.ColumnName.isnull().sum()
+```
+
+Obtain the mean value of a column:
+
+```
+df.ColumnName.mean()
+```
+
+Make a new column which is some transformation (recode) of another column:
+
+```
+df['NewColumn'] = df.OldColumn*5
+```
+
+Access rows with a specific value in a specified column:
+
+```
+df[df.ColumnName==value]
+```
+
+
+
 
 
